@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+int recur_decode(int n);
+string s;
+int p;
+
+int main(void){
+	int n;
+
+//==========================
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+ //==========================
+
+	cin >> s;
+	cin >> n;
+
+	p = -1; //初始值為第一個字元的"前面"
+	cout << recur_decode(n) << '\n';
+
+	return 0;
+}
+
+int recur_decode(int n){
+	int i, black = 0;
+ 
+	p++;
+
+	if(s[p] == '0'){ //白色像素
+		black = 0;
+	}else if(s[p] == '1'){ //黑色像素
+		black = n*n;
+	}else{ //s[p] == '2', 遞迴解碼
+		for(i=0; i<=3; i++){
+			black += recur_decode(n/2);
+		}
+	}
+
+	return black;
+}
