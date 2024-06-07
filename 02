@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+int main(void){
+	string s0;
+	bool flag = true;
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	while(getline(cin, s0)){
+		for(auto c:s0){
+			if(c == '"'){
+				cout << (flag? "``" : "''");
+				flag = !flag;
+			}else{
+				cout << c;
+			}
+		}
+		cout << '\n';
+	}
+	return 0;
+}
