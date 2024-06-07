@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+//注意字串常數中脫逃字元 '\' 的寫法 '\\'
+string s=
+       "`1234567890-=QWERTYUIOP[]\\ASDFGHJKL;'ZXCVBNM,./";
+
+int main(void){
+	char c;
+	int i;
+
+	//==========================
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	//==========================
+	
+	while(cin.get(c)){
+		for(i=1; i<s.length() && s[i] != c; i++);
+		
+		if(i<s.length()){
+		cout << s[i-1];
+		}else{
+		cout << c;
+		}
+    }
+
+    return 0;
+}
