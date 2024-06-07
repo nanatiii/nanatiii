@@ -1,0 +1,47 @@
+#include <iostream>
+ #include <set>
+ #include <stack>
+ using namespace std;
+
+ int main(void){
+	set<string> op;
+	string s0;
+	stack<int> s;
+	int num1, num2;
+	//==========================
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	//==========================
+	
+	op.insert("+");
+	op.insert("-");
+	op.insert("*");
+	op.insert("/");
+	
+	while(cin >> s0){
+		if(op.count(s0)){
+			num2 = s.top(); s.pop();
+			num1 = s.top(); s.pop();
+	
+			switch(s0[0]){
+				case '+':
+					s.push(num1+num2);
+					break;
+				case '-':
+					s.push(num1-num2);
+					break;
+				case '*':
+					s.push(num1*num2);
+					break;
+				default: //'/'
+					s.push(num1/num2);
+			}
+		}else{
+			s.push(stoi(s0));
+		}
+	}
+	
+	cout << s.top();
+	
+	return 0;
+ }
