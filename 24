@@ -1,0 +1,63 @@
+#include <iostream>
+using namespace std;
+
+long long recur_loop(int &head, int &tail);
+
+string s0;
+int tape = 0;
+
+int main(void){
+	int i, j;
+	long long walk = 0;
+	
+	//==========================
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	//==========================
+	
+	cin >> s0;
+	
+	//i for head, j for tail
+	walk = recur_loop(i, j);
+	walk += abs(i-10); //指針初始位置為 10
+	
+	cout << walk;
+	
+	return 0;
+}
+
+
+long long recur_loop(int &head, int &tail){
+	long long walk = 0, subwalk;
+	int t, i, j;
+	
+	head = tail = -1;
+	
+	while(1){
+		if(tape == s0.length()) return walk;
+		
+		if(s0[tape] == 'T'){
+			t = stoi(s0.substr(tape+1, 2));
+			tape += 3;
+			
+			if(tail == -1) head = t;
+			else walk += abs(t-tail);
+			tail = t;
+		}else if(s0[tape] == 'L'){
+			t = stoi(s0.substr(tape+1, 1));
+			tape += 2;
+			
+			//i for head, j for tail
+			subwalk = recur_loop(i, j);
+			
+			if(tail == -1) head = i;
+			else walk += abs(i-tail);
+			tail = j;
+			
+			walk += subwalk*t+abs(j-i)*(t-1);
+		}else{ // 'E'
+			tape++;
+			return walk;
+		}
+	}
+}
