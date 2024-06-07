@@ -1,0 +1,17 @@
+#include <iostream>
+#include <map>
+using namespace std;
+int main(void){
+	map<int, int> st;
+	int n;
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	while(cin >> n) st[n]++;
+	for(auto p:st){
+		if(p.second%3){
+			cout << p.first;
+			break;
+		}
+	}
+	return 0;
+ }
