@@ -1,0 +1,57 @@
+#include <iostream>
+#include <stack>
+#include <queue>
+using namespace std;
+int main(void){
+	int n;
+	int t, x;
+	
+//==========================
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+//==========================
+
+	while(cin >> n){
+//ans[] for stack, queue, pq;
+		bool ans[3] = {true, true, true};
+		stack<int> s;
+		queue<int> q;
+		priority_queue<int> pq;
+
+		while(n--){
+			cin >> t >> x;
+			if(t == 1){
+				s.push(x);
+				q.push(x);
+				pq.push(x);
+			}else{
+				if(ans[0]){
+					if(!s.empty()&&x==s.top()) s.pop();
+					else ans[0] = false;
+				}
+
+				if(ans[1]){
+					if(!q.empty()&&x==q.front()) q.pop();
+					else ans[1] = false;
+				}
+
+				if(ans[2]){
+					if(!pq.empty()&&x==pq.top()) pq.pop();
+					else ans[2] = false;
+				}
+			}
+		}
+		if(ans[0] && !ans[1] && !ans[2]){
+			cout << "stack" << '\n';
+		}else if(!ans[0] && ans[1] && !ans[2]){
+			cout << "queue" << '\n';
+		}else if(!ans[0] && !ans[1] && ans[2]){
+			cout << "priority queue" << '\n';
+		}else if(!ans[0] && !ans[1] && !ans[2]){
+			cout << "impossible" << '\n';
+		}else{
+			cout << "not sure" << '\n';
+		}
+	} 
+	return 0;
+}
