@@ -1,0 +1,61 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+
+int S[1000000]; //大小依題意
+int Dis[1000000];
+
+int main(void){
+	int n, P, L, R;
+	queue<int> q;
+	int s, sL, sR;
+	
+	//==========================
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	//==========================
+	
+	cin >> n >> P >> L >> R;
+	for(int i=0; i<n; i++) cin >> S[i]; //瞬間移動
+	
+	q.push(0);
+	while(1){
+		if(q.empty()){ //無法到達目標位置 P
+		cout << -1;
+		break;
+		}
+		
+		s = q.front(); q.pop();
+		
+		if(s == P){
+		cout << Dis[s];
+		break;
+		}
+		
+		//L (向左移動)
+		sL = s-L;
+		if(sL >= 0){
+			sL = S[sL];
+			if(0<=sL && sL<n){
+				if(Dis[sL]==0){ //尚未拜訪
+					Dis[sL] = Dis[s]+1;
+					q.push(sL);
+				}
+			}
+		}
+
+		//R (向右移動)
+		sR = s+R;
+		if(sR < n){
+			sR = S[sR];
+			if(0<=sR && sR<n){
+				if(Dis[sR] == 0){ //尚未拜訪
+					Dis[sR] = Dis[s]+1;
+					q.push(sR);
+				}
+			}
+		}
+	}
+
+	return 0;
+}
